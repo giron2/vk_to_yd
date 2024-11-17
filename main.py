@@ -13,6 +13,12 @@ class vk():
 		self.i = i
 		self.yd_api = yd_api
 
+	def create_folder(self):
+		api_yandex = self.yd_api
+		headers = {"Authorization": api_yandex}
+		vk_id = self.i
+		fold = requests.put(url=f'https://cloud-api.yandex.net/v1/disk/resources?path=/{vk_id}', headers=headers)
+
 	def upload_ile(self):
 		access_token = ()
 		with open("api_vk.txt") as file:
@@ -34,7 +40,7 @@ class vk():
 		yd = yadisk.YaDisk(token=api_yandex)
 		all_respons = respons_vk.json()['response']
 		items = all_respons['items']
-		yd.mkdir(vk_id)
+		#yd.mkdir(vk_id)
 		info_file = []
 		for item in tqdm(items):
 			for size in item["sizes"]:
@@ -61,5 +67,6 @@ class vk():
 
 
 
-d = vk('6*****', 'y0_A******')
+d = vk('651***', 'y0_A****')
+d.create_folder()
 d.upload_ile()
